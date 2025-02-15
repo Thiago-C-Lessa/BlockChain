@@ -1,55 +1,20 @@
 package main
 
 import (
-	"bytes"
-	"crypto/sha256"
+ 	"Blockchain/blockchain"
 	"fmt"
 )
 
-type BlockChain struct {
-	blocks []*Block
-}
 
-type Block struct {
-	Hash     []byte
-	Data     []byte
-	PrevHash []byte
-}
-
-func (b *Block) DeriveHash() {
-	info := bytes.Join([][]byte{b.Data, b.PrevHash}, []byte{})
-	hash := sha256.Sum256(info)
-	b.Hash = hash[:]
-}
-
-func CreateBlock(data string, prevHash []byte) *Block {
-	block := &Block{[]byte{}, []byte(data), prevHash}
-	block.DeriveHash()
-	return block
-}
-
-func (chain *BlockChain) AddBlock(data string) {
-	prevBlock := chain.blocks[len(chain.blocks)-1]
-	new := CreateBlock(data, prevBlock.Hash)
-	chain.blocks = append(chain.blocks, new)
-}
-
-func Criacao() *Block {
-	return CreateBlock("Criado", []byte{})
-}
-
-func InitBlockChain() *BlockChain {
-	return &BlockChain{[]*Block{Criacao()}}
-}
 
 func main() {
-	chain := InitBlockChain()
+	chain := block.InitBlockChain()
 
 	chain.AddBlock("Primeiro")
 	chain.AddBlock("Segundo")
 	chain.AddBlock("Terceiro")
 
-	for _, block := range chain.blocks {
+	for _, block := range chain.Blocks {
 		fmt.Printf("Previous Hash: %x\n", block.PrevHash)
 		fmt.Printf("Data in Block: %s\n", block.Data)
 		fmt.Printf("Hash: %x\n", block.Hash)
