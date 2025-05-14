@@ -44,9 +44,10 @@ Este repositório contém um estudo sobre blockchain, implementando um modelo fu
 	chain.AddBlock("Primeiro")
 	chain.AddBlock("Segundo")
 	chain.AddBlock("Terceiro")
+```
+
  ![image](https://github.com/user-attachments/assets/ba9de503-06a6-4114-83c4-eae919f9743c)
 
-```
 
 ## Contribuição
 
